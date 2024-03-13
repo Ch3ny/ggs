@@ -3,6 +3,8 @@ package cz.spsmb.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "test-person-table")
@@ -10,9 +12,15 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    long person_id;
     String name;
     int age;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    List<Car> cars = new ArrayList<>();
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    List<Dog> dogs = new ArrayList<>();
 
     public Person(){};
 
@@ -21,12 +29,28 @@ public class Person implements Serializable {
         this.age = age;
     }
 
+    public List<Dog> getDogs() {
+        return dogs;
+    }
+
+    public void setDogs(List<Dog> dogs) {
+        this.dogs = dogs;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
     public long getId() {
-        return id;
+        return person_id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.person_id = id;
     }
 
     public String getName() {
@@ -48,7 +72,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + person_id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
