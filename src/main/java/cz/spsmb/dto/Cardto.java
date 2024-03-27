@@ -1,28 +1,11 @@
-package cz.spsmb.model;
+package cz.spsmb.dto;
 
-import jakarta.persistence.*;
+import cz.spsmb.model.Car;
 
-import java.io.Serializable;
-
-@Entity
-@Table(name = "car")
-public class Car implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+public class Cardto {
     String model;
     String brand;
     double price;
-
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getModel() {
         return model;
@@ -48,12 +31,10 @@ public class Car implements Serializable{
         this.price = price;
     }
 
-
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
+                "model='" + model + '\'' +
                 ", brand='" + brand + '\'' +
                 ", price=" + price +
                 '}';

@@ -5,18 +5,16 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @ApplicationScoped
 public class CarRepository implements PanacheRepository<Car> {
-
-    public List<Car> listByBrand(String brand){
-
+    public List<Car> listByBrand(String brand) {
         return find("brand", brand).list();
     }
-
-    public Car listById(Long id){
-        return findById(id);
+    public Optional<Car> listOp(String brand) {
+        return find("brand", brand).singleResultOptional();
     }
 
 }
